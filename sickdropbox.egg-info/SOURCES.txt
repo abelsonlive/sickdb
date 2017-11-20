@@ -1,0 +1,12 @@
+README.md
+sickdropbox/__init__.py
+sickdropbox/box.py
+sickdropbox/settings.py
+sickdropbox/song.py
+sickdropbox/util.py
+sickdropbox.egg-info/PKG-INFO
+sickdropbox.egg-info/SOURCES.txt
+sickdropbox.egg-info/dependency_links.txt
+sickdropbox.egg-info/entry_points.txt
+sickdropbox.egg-info/requires.txt
+sickdropbox.egg-info/top_level.txt
