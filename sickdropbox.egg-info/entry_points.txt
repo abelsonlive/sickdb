@@ -1,4 +1,0 @@
-[console_scripts]
-sickdb-analysis = sickdropbox.song:run
-sickdb-update = sickdropbox.box:run
-

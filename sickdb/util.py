@@ -1,5 +1,8 @@
 import os
+import re
 import subprocess
+
+re_space = re.compile("\s+")
 
 def path_here(f, *args):
   """
@@ -23,6 +26,24 @@ def path_list(p):
   """
   return (os.path.join(dp, f) for dp, dn, fn in
           os.walk(os.path.expanduser(p)) for f in fn)
+
+def listify(v):
+  if not isinstance(v, list):
+    v = [v]
+  return v
+
+def unlistify(v):
+  if isinstance(v, list):
+    if not len(v):
+      v = None
+    else:
+      v = v[0]
+  return v
+
+def std_string(s):
+  if not s:
+    return ""
+  return re_space.sub(" ", s).strip()
 
 def sys_exec(cmd):
   """

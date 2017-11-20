@@ -1,10 +1,10 @@
 import os
 import re
-from sickdropbox import util
+from sickdb import util
 
 FP_CALC_PATH = util.path_here(__file__, 'bin/chromaprint-fpcalc')
 FREESOUND_PATH = util.path_here(__file__, 'bin/essentia-freesound')
-ACOUSTID_CLIENT = os.getenv("SICKDROPBOX_ACOUSTID_CLIENT", 'VqETNuCPu6')
+ACOUSTID_CLIENT = os.getenv("SICKDROPBOX_ACOUSTID_CLIENT")
 ACOUSTID_URL = 'https://api.acoustid.org/v2/lookup'
 TITLE_FORMAT = "{bpm} ({key}) {title}"
 FILE_FORMAT = "{title}|{uid}.{type}"
@@ -15,6 +15,7 @@ DEFAULT_ARTIST = "Unknown Artist"
 DEFAULT_ALBUM = "Unknown Album"
 DEFAULT_BPM = "0"
 DEFAULT_KEY = ""
+VALID_TYPES = ['mp3', 'aiff', 'wav', 'flac', 'm4a', 'ogg']
 
 # Lookup of Raw Essentia Key to Simplified
 KEY_LOOKUP = {

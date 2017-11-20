@@ -1,9 +1,3 @@
-# djtools
+# Sick Dropbox
 
-Process:
-
-  - Given directory of files
-    - Standardize metadata
-    - Deduplicate
-    - Standardize filenames
-    -
+Automatically analyze and dedupe a directory of tunes.
