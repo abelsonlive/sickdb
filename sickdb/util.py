@@ -43,7 +43,7 @@ def unlistify(v):
 def std_string(s):
   if not s:
     return ""
-  return re_space.sub(" ", s).strip()
+  return re_space.sub(" ", s.replace('"', "'").replace('`', "'").replace('/', ' ')).strip()
 
 def sys_exec(cmd):
   """

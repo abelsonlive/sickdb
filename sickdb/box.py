@@ -1,5 +1,7 @@
 import sys
 import os
+import pipes
+import shutil
 from multiprocessing import Pool
 
 from sickdb import util
@@ -84,9 +86,7 @@ class Box(object):
       if not p.ok:
         raise Exception("ERROR: Could not copy file from {0} to {1} because {2}\n".format(song.file, truth_file, p.stdout))
       sys.stderr.write("INFO: Copying {0} -> {1}\n".format(song.file, truth_file))
-      p = util.sys_exec('cp "{0}" "{1}"'.format(song.file, truth_file))
-      if not p.ok:
-        raise Exception("ERROR: Could not copy file from {0} to {1} because {2}\n".format(song.file, truth_file, p.stdout))
+      shutil.copy(song.file, truth_file)
       # delete source file
       if self.cleanup:
         os.remove(song.file)

@@ -3,6 +3,7 @@ import tempfile
 import json
 import hashlib
 import sys
+import pipes
 
 import requests
 import taglib
@@ -72,7 +73,7 @@ class Song(object):
     Extract uid and fingerprint via
     """
     if self.attrs.get("fingerprint", None) is None:
-      cmd = '{0} "{1}" -json'.format(settings.FP_CALC_PATH, self.file)
+      cmd = '{0} {1} -json'.format(settings.FP_CALC_PATH, pipes.quote(self.file))
       p = util.sys_exec(cmd)
       if not p.ok:
         sys.stderr.write("WARNING: Error running {0}: {1}\n".format(cmd, p.stdout))
@@ -93,7 +94,7 @@ class Song(object):
       fp_root = tempfile.mktemp(suffix='analysis-output')
 
       # cmd
-      cmd = '{0} "{1}" "{2}"'.format(settings.FREESOUND_PATH, self.file, fp_root)
+      cmd = '{0} {1} "{2}"'.format(settings.FREESOUND_PATH, pipes.quote(self.file), fp_root)
 
       # exec
       proc = util.sys_exec(cmd)
