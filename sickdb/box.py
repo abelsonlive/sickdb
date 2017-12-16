@@ -10,7 +10,7 @@ from sickdb.song import Song
 
 class Box(object):
 
-  def __init__(self, directory, cleanup=False, num_workers=8):
+  def __init__(self, directory, cleanup=False, num_workers=1):
     self.directory = os.path.expanduser(directory)
     if not self.directory.endswith("/"):
       self.directory += "/"
@@ -84,9 +84,12 @@ class Box(object):
     if song.file != truth_file:
       p = util.sys_exec('mkdir -p "{0}"'.format(self.directory + song.truth["directory"]))
       if not p.ok:
-        raise Exception("ERROR: Could not copy file from {0} to {1} because {2}\n".format(song.file, truth_file, p.stdout))
+        sys.stderr.write("ERROR: Could not copy file from {0} to {1} because {2}\n".format(song.file, truth_file, p.stdout))
       sys.stderr.write("INFO: Copying {0} -> {1}\n".format(song.file, truth_file))
-      shutil.copy(song.file, truth_file)
+      try:
+        shutil.copy(song.file, truth_file)
+      except Exception as e:
+        sys.stderr.write("ERROR: Could not copy file from {0} to {1} becauce {2}\n".format(song.file, truth_file, e))
       # delete source file
       if self.cleanup:
         os.remove(song.file)

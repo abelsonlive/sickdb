@@ -99,22 +99,20 @@ class Song(object):
       # exec
       proc = util.sys_exec(cmd)
       if not proc.ok:
-        raise Exception("Error running: {0}\n{1}".format(cmd, proc.stdout))
-
+        sys.stderr.write("Error running: {0}\n{1}\n".format(cmd, proc.stderr))
+        return
       # grab output file
-      fp_stats = fp_root + "_statistics.json"
-      fp_frames = fp_root + "_frames.json"
-      data = json.load(open(fp_stats))
+      data = json.load(open(fp_root))
 
       # remove
       try:
-        os.remove(fp_stats)
-        os.remove(fp_frames)
+        os.remove(fp_root)
+        os.remove(fp_root)
       except:
         pass
 
       self.attrs["bpm"] = str(round(data.get("rhythm",{}).get("bpm", settings.DEFAULT_BPM), 1))
-      self.attrs["key"] = settings.KEY_LOOKUP.get((data.get("tonal", {}).get("key_key", "") + data.get("tonal", {}).get("key_scale", "")).upper(), settings.DEFAULT_KEY)
+      self.attrs["key"] = settings.KEY_LOOKUP.get((data.get("tonal", {}).get("key_temperley", {}).get("key", "") + data.get("tonal", {}).get("key_temperley", {}).get("scale", "")).upper(), settings.DEFAULT_KEY)
       self.attrs["chord"] = settings.KEY_LOOKUP.get((data.get("tonal", {}).get("chords_key", "") + data.get("tonal", {}).get("chords_scale", "")).upper(), settings.DEFAULT_KEY)
       self.attrs["harmonic_key"] = settings.KEY_TO_HARMONIC.get(self.attrs["key"], "")
 

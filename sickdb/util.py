@@ -56,6 +56,7 @@ def sys_exec(cmd):
       self._stdin = None
       self._stdout = None
       self._stdout_text = None
+      self._stderr_text = None 
       self._returncode = None
 
     def set_stdin(self, stdin):
@@ -63,6 +64,8 @@ def sys_exec(cmd):
 
     def set_stdout(self, stdout):
       self._stdout = stdout
+    def set_stderr(self, stderr):
+      self._stderr = stderr 
 
     @property
     def stdin(self):
@@ -72,6 +75,11 @@ def sys_exec(cmd):
     def stdout(self):
       if self._stdout_text is not None:
         return self._stdout_text
+ 
+    @property 
+    def stderr(self):
+      if self._stderr_text is not None:
+        return self._stderr_text 
 
     @property
     def returncode(self):
@@ -93,7 +101,8 @@ def sys_exec(cmd):
         args=self.command,
         shell=True,
         stdin=self._stdin if self._stdin else subprocess.PIPE,
-        stdout=subprocess.PIPE
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
       )
 
     def wait(self, unread=False):
