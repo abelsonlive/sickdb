@@ -10,7 +10,7 @@ from sickdb.song import Song
 
 class Box(object):
 
-  def __init__(self, directory, cleanup=False, num_workers=1):
+  def __init__(self, directory, cleanup=False, num_workers=8):
     self.directory = os.path.expanduser(directory)
     if not self.directory.endswith("/"):
       self.directory += "/"
@@ -111,7 +111,10 @@ class Box(object):
     sys.stderr.write("INFO: Deduping {0} files from SickDB {1}\n".format(self.num_duplicates, self.directory))
     for song in self.duplicates:
       sys.stderr.write("INFO: Removing Duplicate: {0}\n".format(song.file))
-      os.remove(song.file)
+      try:
+        os.remove(song.file)
+      except:
+        pass
     self.cleanup_dirs()
 
   def cleanup_dirs(self):
