@@ -126,10 +126,29 @@ class Box(object):
       if os.path.isdir(d):
         if not os.listdir(d):
           sys.stderr.write("INFO: Removing directory {0}\n".format(d))
-          os.rmdir(d)
+          try:
+            os.rmdir(d)
+          except:
+            pass
 
-def run():
+  def add_to_itunes(self):
+    self.load()
+    for s in self.songs:
+      util.sys_exec("mv {0} '{1}'".format(pipes.quote(s.file), settings.ADD_TO_ITUNES_PATH))
+
+
+def run_update():
   d = sys.argv[1]
   b = Box(d, cleanup=True)
   b.update()
+
+def run_dedupe():
+  d = sys.argv[1]
+  b = Box(d, cleanup=True)
   b.dedupe()
+
+def run_to_itunes():
+  d = sys.argv[1]
+  b = Box(d, cleanup=True)
+  b.add_to_itunes()
+

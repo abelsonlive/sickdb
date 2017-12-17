@@ -16,6 +16,7 @@ DEFAULT_ALBUM = "Unknown Album"
 DEFAULT_BPM = "0"
 DEFAULT_KEY = ""
 VALID_TYPES = ['mp3', 'aiff', 'wav', 'flac', 'm4a', 'ogg']
+ADD_TO_ITUNES_PATH = '/Volumes/db/Music/Automatically Add to iTunes.localized'
 
 # Lookup of Raw Essentia Key to Simplified
 KEY_LOOKUP = {

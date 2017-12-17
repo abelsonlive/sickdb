@@ -14,8 +14,9 @@ def build():
     install_requires = ['pytaglib', 'requests'],
     entry_points={
       'console_scripts': [
-          'sickdb-analysis = sickdb.song:run',
-          'sickdb-update = sickdb.box:run'
+          'sickdb-update = sickdb.box:run_update',
+          'sickdb-dedupe = sickdb.box:run_dedupe',
+          'sickdb-to-itunes = sickdb.box:run_to_itunes'
           ]
     },
     classifiers=[
