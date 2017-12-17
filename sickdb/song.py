@@ -76,7 +76,7 @@ class Song(object):
       cmd = '{0} {1} -json'.format(settings.FP_CALC_PATH, pipes.quote(self.file))
       p = util.sys_exec(cmd)
       if not p.ok:
-        sys.stderr.write("WARNING: Error running {0}: {1}\n".format(cmd, p.stdout))
+        sys.stderr.write("WARNING: Error running {0}: {1}\n".format(cmd, p.stderr))
       try:
         data = json.loads(p.stdout)
         data["duration"] = str(int(round(data.get("duration", 0), 0)))
@@ -97,9 +97,9 @@ class Song(object):
       cmd = '{0} {1} "{2}"'.format(settings.FREESOUND_PATH, pipes.quote(self.file), fp_root)
 
       # exec
-      proc = util.sys_exec(cmd)
-      if not proc.ok:
-        sys.stderr.write("Error running: {0}\n{1}\n".format(cmd, proc.stderr))
+      p = util.sys_exec(cmd)
+      if not p.ok:
+        sys.stderr.write("Error running: {0}\n{1}\n".format(cmd, p.stderr))
         return
       # grab output file
       data = json.load(open(fp_root))
