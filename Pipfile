@@ -9,7 +9,7 @@ name = "pypi"
 
 pytaglib = "*"
 requests = "*"
+unidecode = "*"
 
 
 [dev-packages]
-

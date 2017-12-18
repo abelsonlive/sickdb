@@ -7,6 +7,7 @@ import pipes
 
 import requests
 import taglib
+from unidecode import unidecode
 
 from sickdb import util
 from sickdb import settings
@@ -102,8 +103,11 @@ class Song(object):
         sys.stderr.write("Error running: {0}\n{1}\n".format(cmd, p.stderr))
         return
       # grab output file
-      data = json.load(open(fp_root))
-
+      try:
+        data = json.loads(unidecode(open(fp_root).read().decode('latin-1').encode("utf-8")))
+      except Exception as e:
+          sys.stderr.write("WARNING: Could not decode {0} because: {1}".format(self.file, e.message))
+          return
       # remove
       try:
         os.remove(fp_root)
