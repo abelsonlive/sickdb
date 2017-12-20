@@ -104,9 +104,9 @@ class Song(object):
         return
       # grab output file
       try:
-        data = json.loads(unidecode(open(fp_root).read().decode('latin-1').encode("utf-8")))
+        data = json.loads(open(fp_root).read())
       except Exception as e:
-          sys.stderr.write("WARNING: Could not decode {0} because: {1}".format(self.file, e.message))
+          sys.stderr.write("WARNING: Could not decode {0} because: {1}".format(self.file, e))
           return
       # remove
       try:
