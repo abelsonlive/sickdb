@@ -18,7 +18,8 @@ if ENV == 'dev':
 FSM = [
     'update',
     'dedupe',
-    'to_itunes'
+    'to_itunes',
+    'remote_sync'
 ]
 
 

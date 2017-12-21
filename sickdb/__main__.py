@@ -18,6 +18,8 @@ def process_args(args):
         '-dd', '--dedupe', dest='dedupe', action='store_true', help='Dedupe files.')
     arg_parser.add_argument(
         '-t', '--to-itunes', dest='to_itunes', action='store_true', help='Add files to iTunes.')
+    arg_parser.add_argument(
+        '-rs', '--remote-sync', dest='remote_sync', action='store_true', help='Sync files remotely.')
 
     return vars(arg_parser.parse_args(args))
 
@@ -52,7 +54,7 @@ def run_to_itunes(directory=None, **kwargs):
 
 
 @preload_args(sys.argv[1:])
-def run_sync(directory=None, **kwargs):
+def run_remote_sync(directory=None, **kwargs):
     Box(directory, cleanup=True).sync()
 
 
@@ -61,7 +63,8 @@ def main(args=sys.argv[1:]):
     runs = dict(update=run_update,
                 dedupe=run_dedupe,
                 to_itunes=run_to_itunes,
-                sync=run_sync
+                sync=run_sync,
+                remote_sync=run_remote_sync
                 )
     pipeline = [s for s in FSM if s in kwargs.keys() and kwargs[s] is True]
     if len(pipeline) == 0:

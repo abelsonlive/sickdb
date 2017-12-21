@@ -148,6 +148,6 @@ class Box(object):
             util.sys_exec("mv {0} '{1}'".format(
                 pipes.quote(s.file), settings.ADD_TO_ITUNES_PATH))
 
-    def sync(self):
+    def remote_sync(self):
         self.load()
         S3FS().add_many(self.songs)
