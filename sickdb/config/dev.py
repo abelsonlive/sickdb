@@ -19,3 +19,5 @@ ADD_TO_ITUNES_PATH = '/Volumes/db/Music/Automatically Add to iTunes.localized'
 ACOUSTID_CLIENT = os.getenv("SICKDROPBOX_ACOUSTID_CLIENT")
 FP_CALC_PATH = util.path_here(__file__, 'bin/chromaprint-fpcalc')
 FREESOUND_PATH = util.path_here(__file__, 'bin/essentia-freesound')
+S3_BUCKET = os.getenv("SICKDB_S3_BUCKET")
+S3_PATH_KEY = os.getenv("SICKDB_S3_PATH_KEY")

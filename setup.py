@@ -18,7 +18,8 @@ def build():
                 'sickdb = sickdb.__main__:main',
                 'sickdb-update = sickdb.__main__:run_update',
                 'sickdb-dedupe = sickdb.__main__:run_dedupe',
-                'sickdb-to-itunes = sickdb.__main__:run_to_itunes'
+                'sickdb-to-itunes = sickdb.__main__:run_to_itunes',
+                'sickdb-sync = sickdb.__main__:run_sync'
             ]
         },
         classifiers=[
