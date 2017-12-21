@@ -7,6 +7,7 @@ from multiprocessing import Pool
 from sickdb import util
 from sickdb.config import settings
 from sickdb.song import Song
+from sickdb.s3fs import S3FS
 
 
 class Box(object):
@@ -146,3 +147,7 @@ class Box(object):
         for s in self.songs:
             util.sys_exec("mv {0} '{1}'".format(
                 pipes.quote(s.file), settings.ADD_TO_ITUNES_PATH))
+
+    def sync(self):
+        self.load()
+        S3FS().add_many(self.songs)

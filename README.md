@@ -96,3 +96,18 @@ Or just some steps:
 ```
 sickdb -d /path/to/music --dedupe --to-itunes
 ```
+
+## Sync
+
+Set environment variables for `SICKDB_S3_BUCKET` and `SICKDB_S3_PATH_KEY`. If you want a file to show up at `s3://sickdb/dev/songs/cool-song.mp3`, then set:
+
+```
+export SICKDB_S3_BUCKET=sickdb
+export SICKDB_S3_PATH_KEY=dev/songs
+```
+
+Then local files will upload to s3 via:
+
+```
+sickdb-sync -d /path/to/music/
+```
