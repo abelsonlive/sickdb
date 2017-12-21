@@ -125,7 +125,3 @@ def sys_exec(cmd):
 
         def __repr__(self):
             return '<Process: {0}>'.format(self.command)
-
-    p = _proc(cmd)
-    p.run()
-    return p
