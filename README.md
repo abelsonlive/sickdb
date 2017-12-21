@@ -51,17 +51,17 @@ export SICKDROPBOX_ACOUSTID_CLIENT=<key>
 Run track analysis and transformations on a directory of audio files:
 
 ```
-sickdb-update /path/to/music
+sickdb-update -d /path/to/music
 ```
 
 ## Add to iTunes
 
-Change the `ADD_TO_ITUNES_PATH` value in `settings.py` to the path where your `Automatically\ Add\ to\ iTunes.localized` file resides.
+Add an `ADD_TO_ITUNES_PATH` environment variable for the location where your `Automatically\ Add\ to\ iTunes.localized` file resides.
 
 This might default to:
 
 ```
-/Users/<user>/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes.localized/
+export ADD_TO_ITUNES_PATH=/Users/<user>/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes.localized/
 ```
 
 Then re-install sickdb:
@@ -71,5 +71,43 @@ make build
 ```
 
 ```
-sickdb-to-itunes /path/to/music
+sickdb-to-itunes d /path/to/music
+```
+
+## Dedupe
+
+Dedupe the audio files in a directory.
+
+```
+sickdb-dedupe -d /path/to/music
+```
+
+
+## FSM
+
+You can run the hard-wired sickdb 'finite state machine' with all steps:
+
+```
+sickdb -d /path/to/music
+```
+
+Or just some steps:
+
+```
+sickdb -d /path/to/music --dedupe --to-itunes
+```
+
+## Sync
+
+Set environment variables for `SICKDB_S3_BUCKET` and `SICKDB_S3_PATH_KEY`. If you want a file to show up at `s3://sickdb/dev/songs/cool-song.mp3`, then set:
+
+```
+export SICKDB_S3_BUCKET=sickdb
+export SICKDB_S3_PATH_KEY=dev/songs
+```
+
+Then local files will upload to s3 via:
+
+```
+sickdb-sync -d /path/to/music/
 ```
